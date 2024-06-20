@@ -21,9 +21,8 @@ namespace Sigma.Service.Services
 
 		public async Task<ResponseViewModel<Candidate>> AddUpdateCandidateAsync(Candidate model)
 		{
-			Candidate existingCandidate = (await _candidateRepository
-				.GetAllAsync())
-				.FirstOrDefault(x => x.Email == model.Email);
+			Candidate existingCandidate = (await _candidateRepository.GetAllAsync())
+				.FirstOrDefault(x => string.Equals(x.Email, model.Email, StringComparison.OrdinalIgnoreCase));
 
 			if (existingCandidate == null)
 			{
@@ -39,7 +38,7 @@ namespace Sigma.Service.Services
 					Comment = model.Comment
 				};
 
-				await _candidateRepository.AddAsync(candidate);
+				await this._candidateRepository.AddAsync(candidate);
 			}
 			else
 			{
@@ -51,7 +50,7 @@ namespace Sigma.Service.Services
 				existingCandidate.GitHubProfile = model.GitHubProfile;
 				existingCandidate.Comment = model.Comment;
 
-				_candidateRepository.Update(existingCandidate);
+				this._candidateRepository.Update(existingCandidate);
 			}
 
 			await this._unitOfWork.SaveChangesAsync();
