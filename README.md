@@ -4,11 +4,12 @@
 
 1. The repository interface IGenericRepository is implemented interact with the database.
 2. The Candidate model/entity are defined with appropriate properties.
-3. The application uses Entity Framework Core as the ORM for database operations.
+3. Used FluentValidaiton for Required Fields.
+4. The application uses Entity Framework Core as the ORM for database operations.
 
  **Ways for Improvement**
 
-1. Use of ViewModel
+1. Use of ViewModel instead of Entity
 2. Automapper Integration
 ```
    Eg:
