@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sigma.ORM.Abstractions.RepositoryPattern;
+using Sigma.ORM.Context;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,11 +8,32 @@ namespace Sigma.ORM.Abstractions.UnitOfWorkPattern;
 
 public class UnitOfWork : IUnitOfWork
 {
-	private readonly DbContext _context;
+	private readonly SigmaDbContext _context;
+	private Hashtable _repositories;
 
-	public UnitOfWork(DbContext context)
+	public UnitOfWork(SigmaDbContext context)
 	{
 		this._context = context;
+	}
+
+	public IGenericRepository<T> Repository<T>() where T : class
+	{
+		if (this._repositories == null)
+		{
+			this._repositories = new Hashtable();
+		}
+
+		string type = typeof(T).Name;
+
+		if (!this._repositories.ContainsKey(type))
+		{
+			Type repositoryType = typeof(GenericRepository<>);
+			object repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), this._context);
+
+			this._repositories.Add(type, repositoryInstance);
+		}
+
+		return (IGenericRepository<T>)this._repositories[type];
 	}
 
 	public async Task<int> SaveChangesAsync()

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sigma.Model.Models.Request;
+using Sigma.Domain.Entities;
 using Sigma.Service.Interface;
 
 namespace Sigma.API.Controllers
@@ -21,12 +21,12 @@ namespace Sigma.API.Controllers
 		/// Add or update candidate
 		/// </summary>
 		/// <returns></returns>
-		/// <param name="model">candidate data</param>
+		/// <param name="candidate">candidate data</param>
 		// POST api/candidates
 		[HttpPost]
-		public async Task<IActionResult> AddUpdateCandidateAsync(CandidateRequestViewModel model)
+		public async Task<IActionResult> AddUpdateCandidateAsync([FromBody] Candidate candidate)
 		{
-			return this.Ok(await this._candidateService.AddUpdateCandidateAsync(model));
+			return this.Ok(await this._candidateService.AddUpdateCandidateAsync(candidate));
 		}
 
 	}

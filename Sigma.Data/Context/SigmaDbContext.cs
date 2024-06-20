@@ -10,16 +10,7 @@ namespace Sigma.ORM.Context
 
 		}
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			base.OnConfiguring(optionsBuilder);
-		}
-
 		public virtual DbSet<Candidate> Candidates { get; set; }
-
-		protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-		{
-		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

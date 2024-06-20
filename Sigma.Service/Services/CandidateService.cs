@@ -1,9 +1,8 @@
-﻿using Sigma.Model.Models.Request;
+﻿using Sigma.Domain.Entities;
 using Sigma.Model.Models.Response;
 using Sigma.ORM.Abstractions.RepositoryPattern;
 using Sigma.ORM.Abstractions.UnitOfWorkPattern;
 using Sigma.Service.Interface;
-using Sigma.Domain.Entities;
 
 namespace Sigma.Service.Services
 {
@@ -13,22 +12,55 @@ namespace Sigma.Service.Services
 		private readonly IUnitOfWork _unitOfWork;
 
 		public CandidateService(
-			IGenericRepository<Candidate> candidateRepository,
 			IUnitOfWork unitOfWork
 		)
 		{
-			this._candidateRepository = candidateRepository;
+			this._candidateRepository = unitOfWork.Repository<Candidate>();
 			this._unitOfWork = unitOfWork;
 		}
 
-		public IQueryable<Candidate> GetAllAgenciesAsQueryable()
+		public async Task<ResponseViewModel<Candidate>> AddUpdateCandidateAsync(Candidate model)
 		{
-			throw new NotImplementedException();
-		}
+			Candidate existingCandidate = (await _candidateRepository
+				.GetAllAsync())
+				.FirstOrDefault(x => x.Email == model.Email);
 
-		public Task<ResponseViewModel> AddUpdateCandidateAsync(CandidateRequestViewModel model)
-		{
-			throw new NotImplementedException();
+			if (existingCandidate == null)
+			{
+				Candidate candidate = new Candidate()
+				{
+					Email = model.Email,
+					FirstName = model.FirstName,
+					LastName = model.LastName,
+					Phone = model.Phone,
+					GitHubProfile = model.GitHubProfile,
+					LinkedInProfile = model.LinkedInProfile,
+					PreferredCallTime = model.PreferredCallTime,
+					Comment = model.Comment
+				};
+
+				await _candidateRepository.AddAsync(candidate);
+			}
+			else
+			{
+				existingCandidate.FirstName = model.FirstName;
+				existingCandidate.LastName = model.LastName;
+				existingCandidate.Phone = model.Phone;
+				existingCandidate.PreferredCallTime = model.PreferredCallTime;
+				existingCandidate.LinkedInProfile = model.LinkedInProfile;
+				existingCandidate.GitHubProfile = model.GitHubProfile;
+				existingCandidate.Comment = model.Comment;
+
+				_candidateRepository.Update(existingCandidate);
+			}
+
+			await this._unitOfWork.SaveChangesAsync();
+
+			return new ResponseViewModel<Candidate>()
+			{
+				Success = true,
+				Data = model
+			};
 		}
 	}
 }

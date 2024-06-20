@@ -36,9 +36,14 @@ namespace Sigma.ORM.Abstractions.RepositoryPattern
 			return await this._dbContext.Set<TEntity>().FindAsync(id);
 		}
 
-		public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+		public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
 		{
-			return this._dbContext.Set<TEntity>().Where(predicate).ToList();
+			return this._dbContext.Set<TEntity>().Where(predicate);
+		}
+
+		public async Task<IEnumerable<TEntity>> GetAllAsync()
+		{
+			return await this._dbContext.Set<TEntity>().ToListAsync();
 		}
 
 		public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
@@ -46,9 +51,9 @@ namespace Sigma.ORM.Abstractions.RepositoryPattern
 			return await this._dbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
 		}
 
-		public TEntity Add(TEntity entity)
+		public async Task<TEntity> AddAsync(TEntity entity)
 		{
-			EntityEntry entry = this._dbContext.Set<TEntity>().Add(entity);
+			EntityEntry entry = await this._dbContext.Set<TEntity>().AddAsync(entity);
 			return (TEntity)entry.Entity;
 		}
 

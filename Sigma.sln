@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.API", "Sigma.API\Sigma.API.csproj", "{F8DA4C98-2594-46DB-87EB-06740413431D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.API", "Sigma.API\Sigma.API.csproj", "{F8DA4C98-2594-46DB-87EB-06740413431D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.ORM", "Sigma.Data\Sigma.ORM.csproj", "{72253582-BE25-420D-AA18-98EECAC63914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.ORM", "Sigma.Data\Sigma.ORM.csproj", "{72253582-BE25-420D-AA18-98EECAC63914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.Domain", "Sigma.Domain\Sigma.Domain.csproj", "{892A62BC-88CF-4BC6-94CE-06E2F99B2996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.Domain", "Sigma.Domain\Sigma.Domain.csproj", "{892A62BC-88CF-4BC6-94CE-06E2F99B2996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.Service", "Sigma.Service\Sigma.Service.csproj", "{098A6F38-8144-429C-BA28-053091FD67A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.Service", "Sigma.Service\Sigma.Service.csproj", "{098A6F38-8144-429C-BA28-053091FD67A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.Model", "Sigma.Model\Sigma.Model.csproj", "{372119FD-09AB-49FC-B36A-B0FDDDEDA95F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigma.Model", "Sigma.Model\Sigma.Model.csproj", "{372119FD-09AB-49FC-B36A-B0FDDDEDA95F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sigma.UnitTest", "Sigma.UnitTest\Sigma.UnitTest.csproj", "{D6E45EB6-FCB1-4F2B-B05C-67CF66D5355E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{372119FD-09AB-49FC-B36A-B0FDDDEDA95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{372119FD-09AB-49FC-B36A-B0FDDDEDA95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{372119FD-09AB-49FC-B36A-B0FDDDEDA95F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6E45EB6-FCB1-4F2B-B05C-67CF66D5355E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6E45EB6-FCB1-4F2B-B05C-67CF66D5355E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6E45EB6-FCB1-4F2B-B05C-67CF66D5355E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6E45EB6-FCB1-4F2B-B05C-67CF66D5355E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

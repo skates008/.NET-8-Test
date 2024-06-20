@@ -8,9 +8,10 @@ namespace Sigma.ORM.Abstractions.RepositoryPattern
 		TEntity Get<TDataType>(TDataType id) where TDataType : struct;
 		Task Patch<TDataType>(TDataType id, TEntity patch) where TDataType : struct;
 		Task<TEntity> GetAsync<TDataType>(TDataType id) where TDataType : struct;
-		IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
+		IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
+		Task<IEnumerable<TEntity>> GetAllAsync();
 		Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
-		TEntity Add(TEntity entity);
+		Task<TEntity> AddAsync(TEntity entity);
 		IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);
 		void Update(TEntity entity);
 		void Delete(TEntity entity);
